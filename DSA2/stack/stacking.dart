@@ -1,15 +1,16 @@
+import 'dart:collection';
 import 'dart:io';
 
-class Node {
-  var data;
-  Node? next;
+class Node<T> {
+  T data;
+  Node<T>? next;
   Node(this.data);
 }
 
-class Stack {
-  Node? head;
+class Stack<T> {
+  Node<T>? head;
 
-  void push(var value) {
+  void push(T value) {
     var newNode = Node(value);
     if (head == null) {
       head = newNode;
@@ -45,22 +46,17 @@ class Stack {
     }
   }
 
-  // Convert Stack to Queue using another stack
-  Stack stackToQueue() {
-    if (head == null) {
-      print("Stack is empty");
-      return this;
-    }
-
-    Stack tempStack = Stack();
+  stackUsingQueue() {
+    var tempQueue = Queue<T>();
     while (head != null) {
       var poppedValue = pop();
       if (poppedValue != null) {
-        tempStack.push(poppedValue);
+        tempQueue.add(poppedValue);
       }
     }
-
-    return tempStack;
+    while (tempQueue.isNotEmpty) {
+      push(tempQueue.removeFirst());
+    }
   }
 
   reverseString(str) {
@@ -76,7 +72,7 @@ class Stack {
 }
 
 void main() {
-  Stack st = Stack();
+  var st = Stack<int>();
   // st.push(10);
   // st.push(20);
   // st.push(30);

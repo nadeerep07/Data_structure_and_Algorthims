@@ -2,17 +2,17 @@ import 'dart:io';
 
 import '../stack/stacking.dart';
 
-class Node {
-  int data;
-  Node? next;
+class Node<T> {
+  T data;
+  Node<T>? next;
   Node(this.data);
 }
 
-class Queue {
+class Queue<T> {
   Node? head;
   Node? tail;
 
-  void enqueue(int value) {
+  void enqueue(T value) {
     var newNode = Node(value);
     if (head == null) {
       head = newNode;
@@ -56,10 +56,10 @@ class Queue {
 }
 
 void main() {
-  Queue queue = Queue();
+  var queue = Queue<int>();
   queue.enqueue(1);
   queue.enqueue(2);
-  queue.enqueue(3);
+  queue.enqueue(30);
   queue.display();
   print('\n');
   // print('Dequeued: ${queue.dequeue()}');

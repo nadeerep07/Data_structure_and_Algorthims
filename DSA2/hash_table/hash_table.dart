@@ -124,6 +124,7 @@ class HashTable<K, V> {
     for (var pair in table[index]!) {
       if (pair.key == key) {
         pair = Node(key, val);
+        return;
       }
     }
     table[index]!.add(Node(key, val));
