@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:io';
 
 class Node<T> {
@@ -46,20 +45,46 @@ class Stack<T> {
     }
   }
 
-  stackUsingQueue() {
-    var tempQueue = Queue<T>();
+  reverseStack() {
+    var tempStack = Stack();
     while (head != null) {
       var poppedValue = pop();
       if (poppedValue != null) {
-        tempQueue.add(poppedValue);
+        tempStack.push(poppedValue);
       }
     }
-    while (tempQueue.isNotEmpty) {
-      push(tempQueue.removeFirst());
-    }
+    return tempStack;
   }
 
   reverseString(str) {
+    for (int i = 0; i < str.length; i++) {
+      push(str[i]);
+    }
+    var reversed = '';
+    while (head != null) {
+      reversed += pop();
+    }
+    print(reversed);
+  }
+
+  insertBottom(T val) {
+    if (head == null) {
+      push(val);
+      return;
+    }
+    T? temp = pop();
+    insertBottom(val);
+    push(temp!);
+  }
+
+  reverseStackrec() {
+    if (head == null) return;
+    T? top = pop();
+    reverseStackrec();
+    insertBottom(top!);
+  }
+
+  reverseStrings(str) {
     for (int i = 0; i < str.length; i++) {
       push(str[i]);
     }
